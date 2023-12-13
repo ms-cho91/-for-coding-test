@@ -49,6 +49,7 @@ public class CountSpecificNumberInSortedArray {
         if ( result > 0 ) {
             System.out.println(x+" 의 개수 : "+result);
         }else {
+            System.out.println(result);
             System.out.println("데이터가 존재하지 않습니다.");
         }
 
