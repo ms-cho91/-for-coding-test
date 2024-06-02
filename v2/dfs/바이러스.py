@@ -16,6 +16,7 @@ DFS는 스택 자료구조(혹은 재귀 함수)를 이용하며, 구체적인 �
 3. 자료구조
 
 """
+import numpy as np
 
 # DFS 메서드 정의
 def dfs(graph, v, visited):
@@ -29,23 +30,57 @@ def dfs(graph, v, visited):
 
 # 인접 리스트 방식으로 그래프 표현
 # 각 노드가 연결된 정보를 표현(2차원 리스트)
+def count_infected_computers(num_computers, connections):
+    # 그래프 초기화
+    graph = [[] for _ in range(num_computers + 1)]
+    for a, b in connections:
+        graph[a].append(b)
+        graph[b].append(a)
 
-graph = [
+    # 각 노드가 방문된 정보를 표현(1차원 리스트)
+    # 기본적으로 모든 값들을 False로 초기화하고, index 0은 사용하지 않는다.
+    visited = [False]*len(graph)
+    #
+    # # 정의된 DFS 함수 호출
+    dfs(graph,1,visited)
+
+    print(end="\n")
+    print(visited.count(True)-1)
+
+def count(graph, visited, v):
+
+    for i in range(len(graph)):
+        if graph[i][v] == 0:
+            visited.append(graph[i][v+1])
+            graph[graph == graph[i][v+1]] = 0
+    print(visited)
+
+num_computers = 7
+
+connections = [
     [],
-    [2,3,8],
-    [1,7],
-    [1,4,5],
-    [3,5],
-    [3,4],
-    [7],
-    [2,6,8],
-    [1,7]
+    [1,2],
+    [2,3],
+    [1,5],
+    [5,2],
+    [5,6],
+    [4,7],
+    [8,6]
 ]
 
+# NumPy
+matrix = np.array([
+    [1,2],
+    [2,3],
+    [1,5],
+    [5,6],
+    [4,7]
+])
 
-# 각 노드가 방문된 정보를 표현(1차원 리스트)
-# 기본적으로 모든 값들을 False로 초기화하고, index 0은 사용하지 않는다.
-visited = [False]* len(graph)
+matrix[matrix == matrix[0][0]] = 0
+visited = []
+count(matrix, visited, 0)
 
-# 정의된 DFS 함수 호출
-dfs(graph,1,visited)
+
+# count_infected_computers(num_computers, connections)
+
