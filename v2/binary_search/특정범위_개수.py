@@ -2,7 +2,9 @@ import bisect
 
 def count_in_range(arr, low, high):
     left_index = bisect.bisect_left(arr, low)
+    print(f"left_index = [{left_index}]")
     right_index = bisect.bisect_right(arr, high)
+    print(f"right_index = [{right_index}]")
     return right_index - left_index
 
 # (정렬된 상태)
